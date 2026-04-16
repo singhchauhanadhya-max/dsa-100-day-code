@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure of Node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int main() {
+    struct Node *start = NULL, *temp = NULL, *newNode;
+    struct Node *slow, *fast;
+    int n, i, value;
+
+    // Input number of nodes
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    // Create linked list
+    for(i = 1; i <= n; i++) {
+
+        newNode = (struct Node*)malloc(sizeof(struct Node));
+
+        printf("Enter data for node %d: ", i);
+        scanf("%d", &value);
+
+        newNode->data = value;
+        newNode->next = NULL;
+
+        // First node
+        if(start == NULL) {
+            start = newNode;
+            temp = newNode;
+        }
+        // Other nodes
+        else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+
+    // Initialize slow and fast
+    slow = start;
+    fast = start;
+
+    int loopFound = 0;
+
+    // Check for loop
+    while(fast != NULL && fast->next != NULL) {
+
+        slow = slow->next;           // Move 1 step
+        fast = fast->next->next;    // Move 2 steps
+
+        if(slow == fast) {
+            loopFound = 1;
+            break;
+        }
+    }
+
+    // Result
+    if(loopFound == 1) {
+        printf("\nLoop is present in the linked list\n");
+    }
+    else {
+        printf("\nNo loop in the linked list\n");
+    }
+
+    // Print list (only if no loop)
+    temp = start;
+
+    printf("\nLinked List: ");
+    while(temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+
+    printf("NULL");
+
+    return 0;
+}
