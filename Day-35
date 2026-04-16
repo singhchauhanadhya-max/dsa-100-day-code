@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int main() {
+
+    int n, k;
+
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+
+    int a[n];
+
+    printf("Enter elements:\n");
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    printf("Enter K (rotation value): ");
+    scanf("%d", &k);
+
+    k = k % n;   // Handle large K
+
+    int temp[k];
+
+    // Store first K elements
+    for(int i = 0; i < k; i++) {
+        temp[i] = a[i];
+    }
+
+    // Shift left
+    for(int i = k; i < n; i++) {
+        a[i - k] = a[i];
+    }
+
+    // Copy temp at end
+    for(int i = 0; i < k; i++) {
+        a[n - k + i] = temp[i];
+    }
+
+    // Print result
+    printf("After Left Rotation:\n");
+    for(int i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+
+    return 0;
+}
