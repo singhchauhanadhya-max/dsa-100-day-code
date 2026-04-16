@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    int sum1 = 0, sum2 = 0;
+
+    printf("Enter order of square matrix: ");
+    scanf("%d", &n);
+
+    int a[n][n];
+
+    printf("Enter matrix elements:\n");
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    // Calculate diagonal sums
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+
+            // Main diagonal
+            if(i == j) {
+                sum1 += a[i][j];
+            }
+
+            // Secondary diagonal
+            if(i + j == n - 1) {
+                sum2 += a[i][j];
+            }
+        }
+    }
+
+    printf("Sum of Main Diagonal = %d\n", sum1);
+    printf("Sum of Secondary Diagonal = %d\n", sum2);
+
+    return 0;
+}
